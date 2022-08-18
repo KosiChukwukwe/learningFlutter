@@ -16,6 +16,7 @@ class learningFlutter extends StatefulWidget {
 class _State extends State<learningFlutter> {
   String Texts = "Hi there, welcome to my app";
   var value = "Click to know the date and time";
+  int digit = 0;
 
   void onClick() {
     setState(() {
@@ -26,6 +27,18 @@ class _State extends State<learningFlutter> {
   void onPressed() {
     setState(() {
       value = DateTime.now().toString();
+    });
+  }
+
+  void add() {
+    setState(() {
+      digit++;
+    });
+  }
+
+  void subtract() {
+    setState(() {
+      digit--;
     });
   }
 
@@ -64,7 +77,16 @@ class _State extends State<learningFlutter> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
-                  ))
+                  )),
+              SizedBox(
+                height: 20,
+              ),
+              Text('Digit = $digit'),
+              SizedBox(
+                height: 10,
+              ),
+              IconButton(onPressed: add, icon: Icon(Icons.add)),
+              IconButton(onPressed: subtract, icon: Icon(Icons.remove)),
             ],
           ),
         ),
