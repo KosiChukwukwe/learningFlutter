@@ -17,6 +17,19 @@ class _State extends State<learningFlutter> {
   String Texts = "Hi there, welcome to my app";
   var value = "Click to know the date and time";
   int digit = 0;
+  String data = "";
+
+  void onChange(String input) {
+    setState(() {
+      data = "Change: $input";
+    });
+  }
+
+  void onSubmit(String input) {
+    setState(() {
+      data = "Submit: $input";
+    });
+  }
 
   void onClick() {
     setState(() {
@@ -42,18 +55,36 @@ class _State extends State<learningFlutter> {
     });
   }
 
+  bool? value1 = false;
+  bool? value2 = false;
+
+  void value1Changed(bool? value) {
+    setState(() {
+      value1 = value;
+    });
+  }
+
+  void value2Changed(bool? value) {
+    setState(() {
+      value2 = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Vera is mad'),
+        title: Text('trying out flutter'),
       ),
       body: Container(
         padding: EdgeInsets.all(20),
         child: Center(
           child: Column(
             children: <Widget>[
+              // how to use elevated buttons, remember to check above
+              // for the functions needed...
+
               Text(Texts),
               ElevatedButton(
                   onPressed: onClick,
@@ -69,6 +100,10 @@ class _State extends State<learningFlutter> {
               SizedBox(
                 height: 20,
               ),
+
+              // how to use text buttons, remember to check above
+              // for the functions needed...
+
               Text(value),
               TextButton(
                   onPressed: onPressed,
@@ -81,12 +116,40 @@ class _State extends State<learningFlutter> {
               SizedBox(
                 height: 20,
               ),
+
+              // how to use icon buttons, remember to check above
+              // for the functions needed...
+
               Text('Digit = $digit'),
               SizedBox(
                 height: 10,
               ),
+
               IconButton(onPressed: add, icon: Icon(Icons.add)),
               IconButton(onPressed: subtract, icon: Icon(Icons.remove)),
+
+              // how to textfields, remember to check above
+              // for the functions needed...
+
+              Text(data),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: "Hello",
+                  hintText: "just type",
+                  icon: Icon(Icons.type_specimen),
+                ),
+                autocorrect: true,
+                autofocus: true,
+                keyboardType: TextInputType.text,
+                onChanged: onChange,
+                onSubmitted: onSubmit,
+              ),
+
+              // how to use check boxes, remember to check above
+              // for the functions needed...
+
+              Checkbox(value: value1, onChanged: value1Changed),
+              CheckboxListTile(value: value2, onChanged: value2Changed),
             ],
           ),
         ),
