@@ -120,12 +120,35 @@ class _State extends State<learningFlutter> {
     return column;
   }
 
+  bool entry1 = false;
+  bool entry2 = false;
+
+  void onSwitched1(bool value) {
+    setState(() {
+      entry1 = value;
+    });
+  }
+
+  void onSwitched2(bool value) {
+    setState(() {
+      entry2 = value;
+    });
+  }
+
+  double figure = 0.0;
+
+  void onSlide(double value) {
+    setState(() {
+      figure = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('trying out flutter'),
+        title: Text('trying out flutter widgets'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -135,7 +158,17 @@ class _State extends State<learningFlutter> {
               children: <Widget>[
                 // how to use elevated buttons, remember to check above
                 // for the functions needed...
+                SizedBox(
+                  height: 10,
+                ),
 
+                Text(
+                  'ELEVATED BUTTON WIDGET',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
                 Text(Texts),
                 ElevatedButton(
                     onPressed: onClick,
@@ -148,6 +181,11 @@ class _State extends State<learningFlutter> {
                         fontWeight: FontWeight.bold,
                       ),
                     )),
+
+                Divider(
+                  thickness: 2,
+                ),
+
                 SizedBox(
                   height: 20,
                 ),
@@ -155,6 +193,13 @@ class _State extends State<learningFlutter> {
                 // how to use text buttons, remember to check above
                 // for the functions needed...
 
+                Text(
+                  'TEXT BUTTON WIDGET',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 Text(value),
                 TextButton(
                     onPressed: onPressed,
@@ -164,12 +209,22 @@ class _State extends State<learningFlutter> {
                         fontWeight: FontWeight.bold,
                       ),
                     )),
+
+                Divider(thickness: 2),
                 SizedBox(
                   height: 20,
                 ),
 
                 // how to use icon buttons, remember to check above
                 // for the functions needed...
+
+                Text(
+                  'ICON BUTTON WIDGET',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
 
                 Text('Digit = $digit'),
                 SizedBox(
@@ -179,12 +234,23 @@ class _State extends State<learningFlutter> {
                 IconButton(onPressed: add, icon: Icon(Icons.add)),
                 IconButton(onPressed: subtract, icon: Icon(Icons.remove)),
 
+                Divider(
+                  thickness: 2,
+                ),
                 SizedBox(
                   height: 30,
                 ),
 
                 // how to textfields, remember to check above
                 // for the functions needed...
+
+                Text(
+                  'TEXTFIELD WIDGET',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
 
                 Text(data),
                 TextField(
@@ -201,13 +267,43 @@ class _State extends State<learningFlutter> {
                 ),
 
                 SizedBox(
+                  height: 30,
+                ),
+
+                Divider(
+                  thickness: 2,
+                ),
+
+                SizedBox(
                   height: 20,
                 ),
 
                 // how to use check boxes, remember to check above
                 // for the functions needed...
 
+                Text(
+                  'CHECKBOX WIDGETS',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'CheckBox',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
                 Checkbox(value: value1, onChanged: value1Changed),
+
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'CheckBoxListTile',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
                 CheckboxListTile(
                     value: value2,
                     title: Text("Assignment"),
@@ -218,13 +314,115 @@ class _State extends State<learningFlutter> {
                     secondary: Icon(Icons.check_box),
                     onChanged: value2Changed),
 
+                Divider(
+                  thickness: 2,
+                ),
+
+                SizedBox(
+                  height: 20,
+                ),
+
                 //point to note, checkboxListTile > && beter than checkbox
 
                 // how to use radios, remember to check above
                 // for the functions needed...
 
+                Text(
+                  'RADIO WIDGETS',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Radio',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
                 makeRadio(),
+
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'RadiolistTile',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
                 makeRadioTiles(),
+
+                Divider(
+                  thickness: 2,
+                ),
+
+                SizedBox(
+                  height: 20,
+                ),
+
+                // how to use switches, remember to check above
+                // for the functions needed...
+
+                Text(
+                  'SWITCH WIDGETS',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Switch',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Switch(value: entry1, onChanged: onSwitched1),
+
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'SwitchListTile',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SwitchListTile(
+                  value: entry2,
+                  onChanged: onSwitched2,
+                  title: Text(
+                    "grocery shopping",
+                  ),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+
+                SizedBox(
+                  height: 20,
+                ),
+
+                // how to use sliders, remember to check above
+                // for the functions needed...
+
+                Text(
+                  'SLIDER WIDGET',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+
+                Text("figure: ${(figure * 50).round()}"),
+                Slider(value: figure, onChanged: onSlide),
+                Divider(
+                  thickness: 2,
+                ),
+
+                SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),
