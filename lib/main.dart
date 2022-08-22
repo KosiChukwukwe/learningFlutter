@@ -1,6 +1,9 @@
-// ignore_for_file: use_key_in_widget_constructors, camel_case_types, library_private_types_in_public_api, prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names
+// ignore_for_file: use_key_in_widget_constructors, camel_case_types, library_private_types_in_public_api, prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, must_call_super
 
 import 'package:flutter/material.dart';
+import 'dart:async';
+
+import 'package:learningflutter/nextScreen.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -14,6 +17,23 @@ class learningFlutter extends StatefulWidget {
 }
 
 class _State extends State<learningFlutter> {
+  // late List<BottomNavigationBarItem> items;
+  // int index = 0;
+
+  // @override
+  // void initState() {
+  //   items = [];
+  //   items.add(BottomNavigationBarItem(
+  //     icon: Icon(Icons.arrow_forward_ios_outlined),
+  //   ));
+  //   items.add(BottomNavigationBarItem(
+  //     icon: Icon(Icons.arrow_back_ios_outlined),
+  //   ));
+  //   items.add(BottomNavigationBarItem(
+  //     icon: Icon(Icons.arrow_forward_ios_outlined),
+  //   ));
+  // }
+
   String data = "";
 
   void onChange(String input) {
@@ -143,12 +163,195 @@ class _State extends State<learningFlutter> {
     });
   }
 
+  String date = '';
+
+  Future chooseDate() async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2018),
+        lastDate: DateTime(2023));
+
+    if (picked != null) {
+      setState(() => date = picked.toString());
+    }
+  }
+
+  String num3 = "";
+
+  void onSelected() {
+    setState(() {
+      num3 = DateTime.now().toString();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: Text('trying out flutter widgets'),
+        centerTitle: false,
+        title: Text('some flutter widgets'),
+        backgroundColor: Colors.blue,
+        actions: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              digit.toString(),
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
+            ),
+          ),
+          IconButton(onPressed: add, icon: Icon(Icons.add)),
+          IconButton(onPressed: subtract, icon: Icon(Icons.remove)),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: onSelected,
+        backgroundColor: Colors.blue,
+        mini: true,
+        child: Icon(Icons.calendar_today),
+      ),
+      drawer: Drawer(
+        child: Container(
+            padding: EdgeInsets.only(top: 70, bottom: 20),
+            child: Column(
+              children: [
+                Text(
+                  'CONTENTS',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                ListTile(
+                  title: Text(
+                    'THE CURRENT TIME',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                ListTile(
+                  title: Text(
+                    'ELEVATED BUTTON WIDGET',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                ListTile(
+                  title: Text(
+                    'TEXT BUTTON WIDGET',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                ListTile(
+                  title: Text(
+                    'ICON BUTTON WIDGET',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                ListTile(
+                  title: Text(
+                    'TEXTFIELD WIDGET',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                ListTile(
+                  title: Text(
+                    'CHECKBOX WIDGETS',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                ListTile(
+                  title: Text(
+                    'RADIO WIDGETS',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                ListTile(
+                  title: Text(
+                    'SWITCH WIDGETS',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                ListTile(
+                  title: Text(
+                    'SLIDER WIDGET',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                ListTile(
+                  title: Text(
+                    'DATETIME PICKER WIDGET',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: (() => Navigator.pop(context)),
+                  child: Text('Close'),
+                )
+              ],
+            )),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -160,6 +363,17 @@ class _State extends State<learningFlutter> {
                 // for the functions needed...
                 SizedBox(
                   height: 10,
+                ),
+                Text(
+                  'THE DATE AND TIME NOW IS: $num3',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+
+                SizedBox(
+                  height: 20,
                 ),
 
                 Text(
@@ -423,11 +637,46 @@ class _State extends State<learningFlutter> {
                 SizedBox(
                   height: 20,
                 ),
+
+                // how to use datetime picker, remember to check above
+                // for the functions needed...
+
+                Text(
+                  'DATE TIME PICKER WIDGET ',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+
+                Text(date),
+                ElevatedButton(
+                    onPressed: chooseDate, child: Text('select Date')),
+
+                SizedBox(
+                  height: 30,
+                ),
               ],
             ),
           ),
         ),
       ),
+      persistentFooterButtons: [
+        IconButton(
+            onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const NextScreen()),
+                ),
+            icon: Icon(Icons.arrow_forward_ios_outlined)),
+      ],
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: items,
+      //   fixedColor: Colors.blue,
+      //   currentIndex: index,
+      //   onTap: (int value) => setState(() {
+      //     index = value;
+      //   }),
+      // ),
     );
   }
 }
